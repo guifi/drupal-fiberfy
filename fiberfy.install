@@ -1,0 +1,55 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the fiberfy module.
+ * test git commit
+ */
+
+function fiberfy_schema() {
+
+  $schema['budgets'] = array(
+    'fields' => array(
+      'id' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'budget_status' => array('type' => 'varchar', 'length' => '15', 'not null' => FALSE, 'default' => 'Preparation'),
+      'budget_type' => array('type' => 'varchar', 'length' => '15', 'not null'  => TRUE, 'default' => 'crowdfunding', 'comment' => 'CAPEX/OPEX-crowdfunding'),
+      'priority' =>	array('type' => 'varchar', 'length' => '15', 'not null'  => TRUE, 'default' => 'unknown', 'comment' => 'Priority (None/Urgent/Normal/Minor)'),
+      'supplier_id' => array('type' => 'int', 'size' => 'medium', 'unsigned' => TRUE, 'not null'  => TRUE, 'default' => 0, 'comment' => 'Foreign key to supplier'),
+      'ticket_link' => array('type' => 'varchar', 'length' => '100', 'comment' => 'If exists, link to whatever causes the expense, i.e. ticket maintenance...'),
+      'notification' => array('type' => 'varchar', 'length' => '1024', 'not null'  => FALSE),
+      'promoter' => array('type' => 'text', 'size' => 'big', 'not null'  => FALSE),
+      'payment_instructions' => array('type' => 'text', 'size' => 'big', 'not null'  => FALSE),
+      'terms' => array('type' => 'text', 'size' => 'big', 'not null'  => FALSE),
+      'accdate' => array('type' => 'int', 'not null'  => FALSE, 'disp-width' => '11'),
+      'expires' => array('type' => 'int', 'not null'  => TRUE, 'disp-width' => '11', 'default' => 0),
+      'node_id' => array('type' => 'int', 'size' => 'medium', 'unsigned' => TRUE, 'not null'  => TRUE, 'default' => 0, 'comment' => 'Foreign key to guifi_node'),
+      'zone_id' => array('type' => 'int', 'not null'  => TRUE, 'default' => 0, 'comment' => 'Foreign key to guifi_zone'),
+      'currency_txt' => array('type' => 'varchar', 'length' => '10', 'not null'  => FALSE),
+      'currency_symbol' => array('type' => 'varchar', 'length' => '5', 'not null'  => FALSE),
+      'min_contribution' => array('type' => 'numeric', 'not null'  => TRUE, 'default' => 0, 'precision' => '10', 'scale' => '2'),
+      'max_contribution' => array('type' => 'numeric', 'not null'  => FALSE, 'default' => 50000, 'precision' => '20', 'scale' => '2')),
+      'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+function fiberfy_install() {
+  //drupal_install_schema('budgets'); No sé si ha d'anar això
+
+}
+
+function fiberfy_uninstall() {
+  //drupal_uninstall_schema('fiberfy');
+
+  /*variable_del('budget_block_title');
+  variable_del('budget_payment');
+  variable_del('budget_terms');
+  variable_del('budget_expires');
+  variable_del('budget_currency_symbol');
+  variable_del('budget_currency_txt');
+  variable_del('budget_minimum');
+  variable_del('budget_block_title');
+  variable_del('budget_currency_long');*/
+}
+
+?>
